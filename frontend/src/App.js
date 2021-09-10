@@ -1,9 +1,18 @@
 import React from 'react'
+import {Container} from "react-bootstrap"
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
    <>
-    <h1>Welcome To Live Savers</h1>
+    <Header/>
+    <main>
+      <Container>
+        <h1>Welcome To Live Savers</h1>
+      </Container>
+    </main>
+    <Footer/>
    </>
   )
 }
