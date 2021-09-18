@@ -1,30 +1,79 @@
 import mongoose from "mongoose"
 
-const productSchema = mongoose.Schema({
-    //we want to know which user(admin) created a product
-    user
+const reviewSchema = mongoose.Schema({
     name:{
         type:String,
         required:true
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
+    //individual rating
+    rating:{
+        type:Number,
         required:true
     },
-    isAdmin:{
-        type:Boolean,
-        required:true,
-        default:false
+    comment:{
+        type:String,
+        required:true
     }
 },{
     timestamps:true
 })
 
-const User = mongoose.model("User",userSchema)
+const productSchema = mongoose.Schema({
+    //we want to know which user(admin) created a product
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"User"
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    image:{
+        type:String,
+        required:true
+    },
+    brand:{
+        type:String,
+        required:true
+    },
+    category:{
+        type:String,
+        required:true
+    }
+    ,
+    description:{
+        type:String,
+        required:true
+    }
+    ,
+    //average of all the ratings
+    reviews:[reviewSchema],
+    rating:{
+        type:Number,
+        required:true,
+        default:0
+    }
+    ,
+    numReviews:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    price:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    countInStock:{
+        type:Number,
+        required:true,
+        default:0
+    }
+},{
+    timestamps:true
+})
 
-export default User
+const Product = mongoose.model("Product",productSchema)
+
+export default Product
