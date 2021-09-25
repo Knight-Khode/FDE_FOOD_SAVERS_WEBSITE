@@ -18,6 +18,6 @@ export const productListReducer = (state ={products:[]},action)=>{
                 error:action.payload
             }
         default:
-            return
+            return state
     }
 }
