@@ -10,6 +10,9 @@ const CartScreen = ({match,location,history}) => {
 
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
+    const cart = useSelector(state=> state.cart)
+    const {cartItems} = cart
+
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -22,7 +25,7 @@ const CartScreen = ({match,location,history}) => {
         console.log("remove")
     }
 
-    return (/*
+    return (
         <Row>
            <Col md={8}>
                <h1>Shopping Cart</h1>
@@ -68,10 +71,7 @@ const CartScreen = ({match,location,history}) => {
                    </ListGroup>
                </Card>
            </Col>
-        </Row>*/
-        <div>
-            hello
-        </div>
+        </Row>
     )
 }
 
