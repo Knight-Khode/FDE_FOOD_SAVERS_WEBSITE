@@ -13,7 +13,7 @@ const reducer = combineReducers({
 const cartItemsFromStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[]
 
 const initialSate ={
-    cart:{cartItems:cartItemsFromStorage}
+    cart:{cartItems:cartItemsFromStorage},
 }
 
 const midleware = [thunk]
