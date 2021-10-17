@@ -85,7 +85,6 @@ export const userProfileUpdateReducer = (state ={},action)=>{
     switch(action.type){
         case USER_UPDATE_PROFILE_REQUEST:
             return{
-                ...state,
                 loading:true
             }
         case USER_UPDATE_PROFILE_SUCCESS:

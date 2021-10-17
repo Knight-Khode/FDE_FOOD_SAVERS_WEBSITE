@@ -42,7 +42,8 @@ const ProfileScreen = ({location,history}) => {
         if(password !== confirmPassword){
             setMessage("Passwords do not match")
         }else{
-            dispatch(updateUserProfile({id:user.id,name,email,password}))
+            console.log(name,email,password)
+            dispatch(updateUserProfile({id:userInfo._id,name,email,password}))
         }
     }
 
@@ -51,7 +52,7 @@ const ProfileScreen = ({location,history}) => {
         <h2>User Profile</h2>
             {message && <Message variant="danger">{message}</Message>}
             {error && <Message variant="danger">{error}</Message>}
-            {success && <Message variant="success">{success}</Message>}
+            {success && <Message variant="success">Profile Updated</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="name">
