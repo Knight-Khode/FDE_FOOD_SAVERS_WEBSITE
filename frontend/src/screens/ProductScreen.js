@@ -46,7 +46,7 @@ const ProductScreen = ({history,match}) => {
                             Price: GHC{product.price}
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            Description: GHC{product.description}
+                            Description: {product.description}
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
@@ -70,6 +70,16 @@ const ProductScreen = ({history,match}) => {
                                     </Col>
                                     <Col>
                                         {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                                    </Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>
+                                        Discounted Price:
+                                    </Col>
+                                    <Col>
+                                        {(product.price * 90)/100}
                                     </Col>
                                 </Row>
                             </ListGroup.Item>

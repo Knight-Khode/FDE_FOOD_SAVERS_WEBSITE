@@ -23,7 +23,8 @@ const Product = ({product}) => {
             </Card.Text>
             <Card.Text as ="h3">
                 <div className="my-3">
-                    ${product.price}
+                    <strike style={{fontSize:"18px",color:"red"}}>GHC{product.price}</strike>
+                    <p>{(product.price*90)/100}</p>
                 </div>
             </Card.Text>
         </Card>

@@ -1,6 +1,6 @@
-/*import mongoose from "mongoose"
+import mongoose from "mongoose"
 import dotenv from "dotenv"
-import users from "./data/users.js"
+//import users from "./data/users.js"
 import products from "./data/products.js"
 import User from "./models/userModel.js"
 import Product from "./models/productModel.js"
@@ -49,4 +49,4 @@ const destroyData = async ()=>{
         process.exit(1)
     }
 }
-importData()*/
+importData()

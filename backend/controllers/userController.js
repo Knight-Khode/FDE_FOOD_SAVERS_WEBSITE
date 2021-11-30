@@ -3,6 +3,11 @@ import User from "../models/userModel.js"
 import generateToken from "../utils/generateToken.js"
 
 
+const getAllUsers = asyncHandler(async(req,res)=>{
+    const users = await User.find()
+    res.json(users)
+})
+
 // @desc    Auth user & get token
 // @route   POST/api/users/login
 // @access  Public
@@ -41,15 +46,18 @@ const registerUser = asyncHandler(async(req,res) =>{
        email,
        password
    })
-
+ 
    if(user){
-       res.status(201).json({
+       const userDetail={
         _id: user._id,
         name:user.name,
         email:user.email,
         isAdmin:user.isAdmin,
         token:generateToken(user._id)
-       })
+       }
+       res.status(201).json(userDetail)
+       req.headers.x_auth_token = userDetail.token
+       console.log(req.headers.x_auth_token)
    }else{
        res.status(400)
        throw new Error("Invalid user data")
@@ -60,7 +68,7 @@ const registerUser = asyncHandler(async(req,res) =>{
 // @route   GET/api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async(req,res) =>{
-   const user= await User.findById(req.user.id)
+   const user= await User.findById(req.user)
    if(user){
      res.json({
         id: user._id,
@@ -74,8 +82,38 @@ const getUserProfile = asyncHandler(async(req,res) =>{
    }
 })
 
+// @desc    Update user profile
+// @route   PUT/api/users/profile
+// @access  Private
+const updateUserProfile = asyncHandler(async(req,res) =>{
+    console.log("Hello")
+    console.log(req.body.user)
+    const user= await User.findById(req.user)
+    if(user){
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        if(req.body.password){
+            user.password = req.body.password
+        }
+
+        const updatedUser = await user.save()
+        res.json({
+            _id: updatedUser._id,
+            name:updatedUser.name,
+            email:updatedUser.email,
+            isAdmin:updatedUser.isAdmin,
+            token:generateToken(updatedUser._id)
+           })
+    }else{
+        res.status(404)
+        throw new Error("User not found")
+    }
+ })
+
 export {
     authUser,
     getUserProfile,
-    registerUser
+    registerUser,
+    updateUserProfile,
+    getAllUsers
 }
